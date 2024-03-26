@@ -89,7 +89,7 @@ try {
         # If it is Resources.Management.Sdk, flag and will use tag for sdk generation
         $IsResources = $false;
         Write-Host "111" $IsResources
-        if ($_ -match "Resources.Management.Sdk")
+        if ($_ -eq "src/Resources/Resources.Management.Sdk")
         {
             $IsResources = $true;
         }
