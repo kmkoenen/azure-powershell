@@ -116,6 +116,7 @@ try {
                 Write-Host "Using autorest powershell v4:`nRe-generating SDK under Generated folder for $ModuleName..."
                 if ($IsResources)
                 {
+                    Write-Host "Specific generation for Resources.Management.Sdk"
                     rm -r Generated/*
                     autorest --reset
                     autorest --use:@autorest/powershell@4.x --tag=package-privatelinks-2020-05
