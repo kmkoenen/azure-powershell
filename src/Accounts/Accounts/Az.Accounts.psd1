@@ -150,7 +150,6 @@ PrivateData = @{
         ReleaseNotes = '* Supported interactive subscription selection for user login flow.'
 
         # Prerelease string of this module
-        Prerelease = 'preview'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
