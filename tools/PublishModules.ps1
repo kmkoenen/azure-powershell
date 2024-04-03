@@ -109,7 +109,7 @@ if ($PublishLocal) {
 $null = New-Item -ItemType Directory -Force -Path $tempRepoPath
 $tempRepoName = ([System.Guid]::NewGuid()).ToString()
 $repo = Get-PSRepository | Where-Object { $_.SourceLocation -eq $tempRepoPath }
-if ($repo -ne $null) {
+if ($null -ne $repo) {
     $tempRepoName = $repo.Name
 } else {
     Register-PSRepository -Name $tempRepoName -SourceLocation $tempRepoPath -PublishLocation $tempRepoPath -InstallationPolicy Trusted -PackageManagementProvider NuGet
@@ -122,6 +122,11 @@ $Errors = $null
 try {
     $modules = Get-AllModules -BuildConfig $BuildConfig -Scope $Scope -TargetBuild $TargetBuild -PublishLocal:$PublishLocal -IsNetCore:$IsNetCore
     Add-AllModules -ModulePaths $modules -TempRepo $tempRepoName -TempRepoPath $tempRepoPath -NugetExe $NugetExe
+    Write-Output "$PublishLocal"
+    Write-Output "$repositoryLocation"
+    test-path "$repositoryLocation"
+    Write-Output "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+
     Publish-AllModules -ModulePaths $modules -ApiKey $apiKey -TempRepoPath $tempRepoPath -RepoLocation $repositoryLocation -NugetExe $NugetExe -PublishLocal:$PublishLocal
 } catch {
     $Errors = $_
